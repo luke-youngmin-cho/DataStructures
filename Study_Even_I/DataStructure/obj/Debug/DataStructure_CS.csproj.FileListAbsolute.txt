@@ -1,0 +1,8 @@
+C:\Users\ym_lu\Documents\GitHub\Study_Even_I\Study_Even_I\DataStructure\bin\Debug\DataStructure.exe.config
+C:\Users\ym_lu\Documents\GitHub\Study_Even_I\Study_Even_I\DataStructure\bin\Debug\DataStructure.exe
+C:\Users\ym_lu\Documents\GitHub\Study_Even_I\Study_Even_I\DataStructure\bin\Debug\DataStructure.pdb
+C:\Users\ym_lu\Documents\GitHub\Study_Even_I\Study_Even_I\DataStructure\obj\Debug\DataStructure_CS.csproj.AssemblyReference.cache
+C:\Users\ym_lu\Documents\GitHub\Study_Even_I\Study_Even_I\DataStructure\obj\Debug\DataStructure_CS.csproj.SuggestedBindingRedirects.cache
+C:\Users\ym_lu\Documents\GitHub\Study_Even_I\Study_Even_I\DataStructure\obj\Debug\DataStructure_CS.csproj.CoreCompileInputs.cache
+C:\Users\ym_lu\Documents\GitHub\Study_Even_I\Study_Even_I\DataStructure\obj\Debug\DataStructure.exe
+C:\Users\ym_lu\Documents\GitHub\Study_Even_I\Study_Even_I\DataStructure\obj\Debug\DataStructure.pdb
