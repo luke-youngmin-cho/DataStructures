@@ -43,8 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Practice_Dictionary.cs" />
+    <Compile Include="Practice_HashTable.cs" />
     <Compile Include="Practice_LinkedList.cs" />
     <Compile Include="Practice_List.cs" />
+    <Compile Include="Practice_Queue.cs" />
+    <Compile Include="Practice_Stack.cs" />
+    <Compile Include="Practice_Tree.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

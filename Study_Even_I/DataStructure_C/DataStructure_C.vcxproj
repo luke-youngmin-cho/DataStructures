@@ -140,9 +140,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="Practice_Dictionary.c" />
     <ClCompile Include="Practice_LinkedList.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Practice_Dictionary.h" />
     <ClInclude Include="Practice_LinkedList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

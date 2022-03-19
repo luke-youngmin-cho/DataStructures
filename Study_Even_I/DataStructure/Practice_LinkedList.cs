@@ -17,9 +17,10 @@ namespace DataStructure
     //
     // 시간복잡도
     // 
-    // 노드를 추가할 때 : O(1)
-    // 노드를 삭제할 때 : O(1)
-    // 특정 노드를 찾을 때 : O(n)
+    // - 추가 : O(1)
+    // - 검색 : O(n)
+    // - 삭제 : O(n)
+    // - 인덱스접근 : O(n)
     // 
     
     internal class Practice_LinkedList

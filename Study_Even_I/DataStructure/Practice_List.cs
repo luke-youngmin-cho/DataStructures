@@ -7,6 +7,16 @@ using System.Threading.Tasks;
 namespace DataStructure
 {
     // List
+    // 제네릭 동적 배열. 
+    // 데이터의 수가 현재 크기를 초과할 경우 메모리할당량을 증가시킴.
+    //
+    // 시간복잡도 :
+    // - 추가 : ADD() 는 가장 마지막에 추가하므로 O(1), Insert() 는 특정 인덱스에 추가한 후 나머지 
+    //           요소들을 뒤로 밀어내야하므로 O(n) 이 걸림.
+    // - 검색 : O(n)
+    // - 삭제 : O(n)
+    // - 인덱스 접근 : O(1)
+
     internal class Practice_List
     {
         public void DoExample()

@@ -8,7 +8,7 @@ struct Node {
 	struct Node *next;
 } *head, *tail, *ptr;
 
-int DoExample() {
+int DoExample_LinkedList() {
 	head = NULL;
 	int index, flag = 0;
 	while (flag == 0) {
