@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Practice_Dictionary.cs" />
+    <Compile Include="Practice_DynamicArray.cs" />
     <Compile Include="Practice_HashTable.cs" />
     <Compile Include="Practice_LinkedList.cs" />
     <Compile Include="Practice_List.cs" />
