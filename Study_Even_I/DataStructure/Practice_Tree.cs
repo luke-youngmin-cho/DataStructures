@@ -28,52 +28,159 @@ namespace DataStructure
     // 탐색시간이 2^N에 반비례 하므로 시간 복잡도가 O(log_2 N) 임.(이상적인 이진트리일 경우에 한해서)
     // 삽입도 크기비교하여(탐색하여) 진행하므로 시간복잡도는 동일
 
-    // 삭제시..? 는 아직 이해가 되지않음
+    // 삭제시
+    // 삭제할 노드 검색에 O(LogN) , 
+    // 삭제할 노드를 대체할 자식 노드를 검색하는데 O(LogN) 이므로 
+    // O(2LogN) = O(LogN)
 
     internal class Practice_Tree
     {
-        public class TreeNode<T> //: IEnumerable<TreeNode<T>>
-        {
-            public T Data { get; set; }
-            public TreeNode<T> Parent { get; set; }
-            public ICollection<TreeNode<T>> Children { get; set; }
-
-            public TreeNode(T data)
+        public class BinaryTree<T> 
+        { 
+            public class Node<K>
             {
-                this.Data = data;
-                this.Children = new LinkedList<TreeNode<T>>();
+                public K value;
+                public Node<K> left;
+                public Node<K> right;
             }
+            Node<T> root, tmp, tmp2;
 
-            public TreeNode<T> AddChild(T child)
+
+            // O(n)
+            public Node<T> Find(T item)
             {
-                TreeNode<T> childNode = new TreeNode<T>(child) { Parent = this };
-                this.Children.Add(childNode);
-                return childNode;
-            }
-
-        }
-
-        public void DoExample_Tree()
-        {
-            TreeNode<string> root = new TreeNode<string>("root");
-            {
-                TreeNode<string> node0 = root.AddChild("node0");
-                TreeNode<string> node1 = root.AddChild("node1");
-                TreeNode<string> node2 = root.AddChild("node2");
+                if (root != null)
                 {
-                    TreeNode<string> node20 = node2.AddChild(null);
-                    TreeNode<string> node21 = node2.AddChild("node21");
+                    tmp = root;
+
+                    while (tmp != null)
                     {
-                        TreeNode<string> node210 = node21.AddChild("node210");
-                        TreeNode<string> node211 = node21.AddChild("node211");
+                        if (Comparer<T>.Default.Compare(item, tmp.value) < 0)
+                            tmp = tmp.left;
+                        else if (Comparer<T>.Default.Compare(item, tmp.value) > 0)
+                            tmp = tmp.right;
+                        else
+                            return tmp;
                     }
                 }
-                TreeNode<string> node3 = root.AddChild("node3");
+                return null;
+            }
+
+            // O(n)
+            public void Add(T item)
+            {
+                if (root != null)
                 {
-                    TreeNode<string> node30 = node3.AddChild("node30");
+                    tmp = root;
+                    while (tmp != null)
+                    {
+                        if (Comparer<T>.Default.Compare(item, tmp.value) < 0)
+                        {
+                            if (tmp.left != null)
+                                tmp = tmp.left;
+                            else
+                            {
+                                tmp.left = new Node<T>(); 
+                                tmp.left.value = item;
+                                return;
+                            }
+                                
+                        }
+                        else if (Comparer<T>.Default.Compare(item, tmp.value) > 0) 
+                        { 
+                            if (tmp.right != null)
+                                tmp = tmp.right;
+                            else
+                            {
+                                tmp.right = new Node<T>(); 
+                                tmp.right.value = item;
+                                return;
+                            }   
+                        }
+                        else
+                            throw new Exception("해당 값의 노드가 이미 존재함");
+                    }                    
+                }
+                else
+                {
+                    root = new Node<T>();
+                    root.value = item;
                 }
             }
-        }
 
+            // O(logN)
+            public bool Delete(T item)
+            {
+                bool isOK = false;
+                if (root != null)
+                {
+                    tmp = root;
+
+                    while (tmp != null)
+                    {
+                        if (Comparer<T>.Default.Compare(item, tmp.value) < 0)
+                            tmp = tmp.left;
+                        else if (Comparer<T>.Default.Compare(item, tmp.value) > 0)
+                            tmp = tmp.right;
+                        else // found
+                        {
+                            isOK = true;
+                            break;
+                        }
+                    }
+
+                    if (isOK)
+                    {
+                        if (tmp.left == null && tmp.right == null)
+                            tmp = null;
+                        else if (tmp.left == null && tmp.right != null)
+                            tmp = tmp.right;
+                        else if (tmp.left != null && tmp.right == null)
+                            tmp = tmp.left;
+                        else
+                        {
+                            // 오른쪽 자식노드로부터 가장 왼쪽 노드찾기
+                            tmp2 = tmp.right;
+                            while (tmp2.left != null)
+                            {
+                                tmp2 = tmp2.left;
+                            }
+                            tmp2.left = tmp.left;
+                            tmp2.right = tmp.right;                            
+                            tmp = tmp2;
+                        }
+                    }
+
+                }
+                return isOK;
+            }
+
+            public void DoExample()
+            {
+                Console.WriteLine("-------- 이진트리 구현 테스트 --------");
+                BinaryTree<int> bt = new BinaryTree<int>();
+                bt.Add(0);
+                bt.Add(1);
+                bt.Add(2);
+                bt.Add(3);
+                bt.Add(5);
+                bt.Add(4);
+                bt.Add(8);
+                Console.WriteLine($"root value : {bt.root.value}");
+                Console.WriteLine($"root - right value : {bt.root.right.value}");
+                var node = bt.Find(2);
+                if (node != null)
+                    Console.WriteLine("2 founded");
+
+                if(bt.Delete(5))
+                    Console.WriteLine("5 deleted!");
+
+                node = bt.Find(8);
+                if (node != null)
+                    Console.WriteLine("8 founded");
+
+            }
+        }
+        
     }
 }
