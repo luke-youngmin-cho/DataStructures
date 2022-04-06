@@ -12,15 +12,11 @@ namespace DataStructure
     // Key 값에 해시 함수를 적용해서 고유한 index 를 생성하고 이 index 로 value 에 접근함
     // 해당 index 가 가리키는 장소를 버킷 / 슬롯 이라고 함
     //
-    // 시간복잡도 :
-    // - 추가 : O(1)
-    // - 검색 : O(1)
-    // - 삭제 : O(1)
-    // - 인덱스접근 : 검색시 해시함수를 통해 인덱스 접근함
+    // 시간복잡도 : 해시 함수에 따라 달라짐
 
     // object 로 저장하기때문에 박싱/언박싱과정이 필요함
     // 박싱은 단순 참조로 할당하는것 보다 20배까지 시간이 소모되고, 언박싱은 단순 값 할당보다 4배정도 시간이 소모되므로
-    // 되도록 제네릭형태(Dictionary) 를 사요앟는것이 좋다.
+    // 되도록 제네릭형태(Dictionary) 를 사용하는것이 좋다.
     //
     //
     // Key 를 위한 고유 index 를 생성하기위한 함수(해시 함수) 는 대표적으로 아래 4가지가 있음.
@@ -30,34 +26,101 @@ namespace DataStructure
     // 4. Univeral Hashing : 다수의 해시함수를 만들어 집합 H 에 넣어두고, 무작위로 해시함수를 선택해서 해시값을 만듬.
     internal class Practice_HashTable
     {
-        Hashtable hashtable = new Hashtable();
+        /// <summary>
+        /// 해시테이블 구현
+        /// 1. 모듈러 연산을 이용한 해시 키 연산
+        /// 2. linkedlist 를 사용한 체이닝 방식으로 충돌 해결
+        /// </summary>
+        public class MyHashtable
+        {
+            const int DEFAULT_SIZE = 100;
+            LinkedList<object>[] _bucket = new LinkedList<object>[DEFAULT_SIZE];
+            int tmpHash;
+
+            public void Add(object key, object value)
+            {
+                tmpHash = Hash(key.ToString());
+                if(_bucket[tmpHash] == null)
+                    _bucket[tmpHash] = new LinkedList<object>();
+                _bucket[tmpHash].AddLast(value);
+                Console.WriteLine($"{key} 가 해시키 {tmpHash} 로 추가되었습니다");
+            }
+
+            public bool Contains(object key)
+            {
+                tmpHash = Hash(key.ToString());
+                if (_bucket[tmpHash].Count > 0)
+                    return true;
+                else
+                    return false;
+            }
+
+            public bool ContainsKey(object key)
+            {
+                return Contains(key);
+            }
+
+            public bool ContainsValue(object value)
+            {
+                for (int i = 0; i < _bucket.Length; i++)
+                {
+                    for (int j = 0; j < _bucket[j].Count; j++)
+                    {
+                        if (_bucket[j].Find(value) != null)
+                            return true;
+                    }
+                }
+                return false;
+            }
+
+            public bool Remove(object key)
+            {
+                tmpHash = Hash(key.ToString());
+                if(_bucket[tmpHash].Count > 0)
+                {
+                    _bucket[tmpHash].Clear();
+                    return true;
+                }
+                else
+                    return false;
+            }
+
+            public void Clear()
+            {
+                for (int i = 0; i < _bucket.Length; i++)
+                {
+                    if(_bucket[i] != null)
+                        _bucket[i].Clear();
+                }
+            }
+
+            private int Hash(string objName)
+            {
+                tmpHash = 0;
+                for (int i = 0; i < objName.Length; i++)
+                {
+                    tmpHash += objName[i];
+                }
+                tmpHash %= DEFAULT_SIZE;
+                return tmpHash;
+            }
+        }
 
         public void DoExample()
         {
-            hashtable.Add("수소", "Hydrogen");
-            hashtable.Add("산소", "Oxygen");
-            hashtable.Add("염소", "Chlorine");
+            MyHashtable myHashTable = new MyHashtable();
+            myHashTable.Add("수소", "Hydrogen");
+            myHashTable.Add("산소", "Oxygen");
+            myHashTable.Add("염소", "Chlorine");
 
-            if (hashtable.Contains("산소"))
+            if (myHashTable.Contains("산소"))
             {
-                hashtable.Remove("산소");
+                myHashTable.Remove("산소");
                 Console.WriteLine("Removed [산소] ");
             }
-            
-
-            hashtable.Clear();
-            Hashtable_Print();
 
 
-        }
-        private void Hashtable_Print()
-        {
-            Console.Write("Hashtable : ");
-            foreach (var item in hashtable)
-            {
-                Console.Write($"({item},{hashtable[item]})");
-            }
-            Console.WriteLine();
+            myHashTable.Clear();
         }
     }
 }
