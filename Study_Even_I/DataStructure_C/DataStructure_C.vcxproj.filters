@@ -24,6 +24,9 @@
     <ClCompile Include="Practice_Dictionary.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Practice_DynamicArray.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Practice_LinkedList.h">

@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="main.c" />
     <ClCompile Include="Practice_Dictionary.c" />
+    <ClCompile Include="Practice_DynamicArray.c" />
     <ClCompile Include="Practice_LinkedList.c" />
   </ItemGroup>
   <ItemGroup>

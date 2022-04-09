@@ -49,6 +49,7 @@
     <Compile Include="Practice_LinkedList.cs" />
     <Compile Include="Practice_List.cs" />
     <Compile Include="Practice_Queue.cs" />
+    <Compile Include="Practice_RedBlackTree.cs" />
     <Compile Include="Practice_Stack.cs" />
     <Compile Include="Practice_Tree.cs" />
     <Compile Include="Program.cs" />
